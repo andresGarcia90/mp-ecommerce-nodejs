@@ -78,11 +78,11 @@ class MercadoPagoService{
                   }, 
                   back_urls: {
                     // declaramos las urls de redireccionamiento
-                    success: "https://localhost:3000/success", 
+                    success:  this.env, 
                     // url que va a redireccionar si sale todo bien
-                    pending: "https://localhost:3000.com/pending", 
+                    pending:  this.env, 
                     // url a la que va a redireccionar si decide pagar en efectivo por ejemplo
-                    failure: "https://localhost:3000.com/error" 
+                    failure:  this.env 
                     // url a la que va a redireccionar si falla el pago
                   }, 
                   notification_url: "https://mercadopago-checkout.herokuapp.com/webhook", 
