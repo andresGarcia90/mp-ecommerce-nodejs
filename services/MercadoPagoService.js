@@ -10,12 +10,11 @@ class MercadoPagoService{
             }
         }
         this.mercadoPagoUrl = "https://api.mercadopago.com/checkout";
+        this.env = 'https://andresgarci-mp-commerce-nodejs.herokuapp.com/';
     }
 
     async createPaymentMercadoPago(name, price, unit, img){
-        console.log("PREVIO ",this.tokenMercadoPago.test.access_token, this.mercadoPagoUrl);
         const url = this.mercadoPagoUrl+"/preferences?access_token="+this.tokenMercadoPago.test.access_token;
-        console.log("URL ", url);
 
         const items = [
             {
@@ -25,7 +24,7 @@ class MercadoPagoService{
             // nombre que viene de la prop que recibe del controller
               description: "Dispositivo movil de Tienda e-commerce",
             // descripción del producto
-              picture_url: img, 
+              picture_url: 'https://andresgarci-mp-commerce-nodejs.herokuapp.com/assets/003.jpg', 
             // url de la imágen del producto
               category_id: "1234",  
             // categoría interna del producto (del negocio)
@@ -63,33 +62,33 @@ class MercadoPagoService{
                     }
                   }, 
                   payment_methods: { 
-            // declaramos el método de pago y sus restricciones
+                    // declaramos el método de pago y sus restricciones
                     excluded_payment_methods: [ 
-            // aca podemos excluir metodos de pagos, tengan en cuenta que es un array de objetos
+                    // aca podemos excluir metodos de pagos, tengan en cuenta que es un array de objetos
                       {
                         id: "amex"
                       }
                     ],
                     excluded_payment_types: [{ id: "atm" }], 
-            // aca podemos excluir TIPOS de pagos, es un array de objetos
+                    // aca podemos excluir TIPOS de pagos, es un array de objetos
                     installments: 6, 
-            // limite superior de cantidad de cuotas permitidas
+                    // limite superior de cantidad de cuotas permitidas
                     default_installments: 6 
-            // la cantidad de cuotas que van a aparecer por defecto
+                    // la cantidad de cuotas que van a aparecer por defecto
                   }, 
                   back_urls: {
-            // declaramos las urls de redireccionamiento
+                    // declaramos las urls de redireccionamiento
                     success: "https://localhost:3000/success", 
-            // url que va a redireccionar si sale todo bien
+                    // url que va a redireccionar si sale todo bien
                     pending: "https://localhost:3000.com/pending", 
-            // url a la que va a redireccionar si decide pagar en efectivo por ejemplo
+                    // url a la que va a redireccionar si decide pagar en efectivo por ejemplo
                     failure: "https://localhost:3000.com/error" 
-            // url a la que va a redireccionar si falla el pago
+                    // url a la que va a redireccionar si falla el pago
                   }, 
                   notification_url: "https://mercadopago-checkout.herokuapp.com/webhook", 
-            // declaramos nuestra url donde recibiremos las notificaciones
+                    // declaramos nuestra url donde recibiremos las notificaciones
                   auto_return: "approved" 
-            // si la compra es exitosa automaticamente redirige a "success" de back_urls
+                    // si la compra es exitosa automaticamente redirige a "success" de back_urls
                 };
 
                 try {
