@@ -78,14 +78,14 @@ class MercadoPagoService{
                   }, 
                   back_urls: {
                     // declaramos las urls de redireccionamiento
-                    success:  this.env, 
+                    success:  this.env + '/success', 
                     // url que va a redireccionar si sale todo bien
-                    pending:  this.env, 
+                    pending:  this.env + '/pending', 
                     // url a la que va a redireccionar si decide pagar en efectivo por ejemplo
-                    failure:  this.env 
+                    failure:  this.env + '/failure' 
                     // url a la que va a redireccionar si falla el pago
                   }, 
-                  notification_url: "https://mercadopago-checkout.herokuapp.com/webhook", 
+                  notification_url: this.env + '/webhook', 
                     // declaramos nuestra url donde recibiremos las notificaciones
                   auto_return: "approved" 
                     // si la compra es exitosa automaticamente redirige a "success" de back_urls
