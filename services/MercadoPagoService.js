@@ -10,7 +10,8 @@ class MercadoPagoService{
             }
         }
         this.mercadoPagoUrl = "https://api.mercadopago.com/checkout";
-        this.env = 'https://andresgarci-mp-commerce-nodejs.herokuapp.com/';
+        this.env = 'https://andresgarci-mp-commerce-nodejs.herokuapp.com';
+        // this.env = 'http://localhost:5000';
     }
 
     async createPaymentMercadoPago(name, price, unit, img){

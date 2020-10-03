@@ -23,6 +23,19 @@ app.get('/detail', function (req, res) {
     res.render('detail', req.query);
 });
 
+app.get('/success', function (req, res) {
+    res.render('success', req.query);
+});
+
+app.get('/pending', function (req, res) {
+    res.render('pending', req.query);
+});
+
+app.get('/failure', function (req, res) {
+    res.render('failure', req.query);
+});
+
+
 app.use(express.static('assets'));
  
 app.use('/assets', express.static(__dirname + '/assets'));
