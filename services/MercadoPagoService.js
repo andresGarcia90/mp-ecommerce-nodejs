@@ -65,12 +65,12 @@ class MercadoPagoService{
              // si estan en sandbox, aca tienen que poner el email de SU usuario de prueba
                     phone: {
                       area_code: "11",
-                      number: "22223333"
+                      number: 22223333
                     },
                     address: {
                       zip_code: "1111",
                       street_name: "False",
-                      street_number: "123"
+                      street_number: 123
                     }
                   }, 
                   payment_methods: { 
