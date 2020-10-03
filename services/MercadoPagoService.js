@@ -1,12 +1,16 @@
 const axios = require("axios"); 
+const mercadopago = require ('mercadopago');
+
 
 class MercadoPagoService{
 
     constructor(){
+     
         this.tokenMercadoPago = {
             prod: {},
             test: {
-                access_token : "APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398"
+                access_token: "APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398",
+                platform_id : "dev_24c65fb163bf11ea96500242ac130004"
             }
         }
         this.mercadoPagoUrl = "https://api.mercadopago.com/checkout";
@@ -17,13 +21,19 @@ class MercadoPagoService{
     async createPaymentMercadoPago(name, price, unit, img){
         const url = this.mercadoPagoUrl+"/preferences?access_token="+this.tokenMercadoPago.test.access_token;
 
+        mercadopago.configure({
+          access_token : this.tokenMercadoPago.test.access_token,
+          integrator_id: this.tokenMercadoPago.test.platform_id
+      });
+
+
         const items = [
             {
               id: "1234", 
             // id interno (del negocio) del item
               title: name, 
             // nombre que viene de la prop que recibe del controller
-              description: "Dispositivo movil de Tienda e-commerce",
+              description: "Dispositivo móvil de Tienda e-commerce",
             // descripción del producto
               picture_url: 'https://andresgarci-mp-commerce-nodejs.herokuapp.com/assets/003.jpg', 
             // url de la imágen del producto
@@ -33,8 +43,9 @@ class MercadoPagoService{
             // cantidad, que tiene que ser un intiger
               currency_id: "ARS", 
             // id de la moneda, que tiene que ser en ISO 4217
-              unit_price: parseFloat(price)
+              unit_price: parseFloat(price),
             // el precio, que por su complejidad tiene que ser tipo FLOAT
+              external_reference : 'garcia.andi90@gmail.com'
             }
           ];  
 
@@ -93,16 +104,9 @@ class MercadoPagoService{
                 };
 
                 try {
-                    const request = await axios.post(url, preferences, {
-               // hacemos el POST a la url que declaramos arriba, con las preferencias
-                      headers: { 
-              // y el header, que contiene content-Type
-                        "Content-Type": "application/json"
-                      }
-                    });
-              
-                    return request.data; 
-              // devolvemos la data que devuelve el POST
+                  const  res = await mercadopago.preferences.create(preferences);
+                  return res.body;
+                  
                   } catch (e) {
                     console.log(e); 
               // mostramos error en caso de que falle el POST

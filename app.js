@@ -43,6 +43,8 @@ app.use('/assets', express.static(__dirname + '/assets'));
 app.post('/checkout', urlencodedParser, function (req, res) {
     MercadoPagoInstance.getMercadoPagoLink(req, res)
 });
+
+app.post("/webhook", (req, res) => MercadoPagoInstance.webhook(req, res)); 
  
 app.listen(process.env.PORT || 5000, () => {
     console.log('The server now is lisen on 5000');
