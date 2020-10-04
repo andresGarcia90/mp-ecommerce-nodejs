@@ -37,7 +37,21 @@ class MercadoPagoController{
           });
         }
         return res.status(200); 
+    }
+
+    notifications(req, res){
+      if (req.method === "POST") { 
+        let body = ""; 
+        req.on("data", chunk => {  
+          body += chunk.toString();
+        });
+        req.on("end", () => {  
+          console.log(body, "IPN RESPUESTA"); 
+          res.end("ok");
+        });
       }
+      return res.status(200);
+    }
 
 
 

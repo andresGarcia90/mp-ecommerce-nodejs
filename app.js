@@ -45,6 +45,8 @@ app.post('/checkout', urlencodedParser, function (req, res) {
 });
 
 app.post("/webhook", (req, res) => MercadoPagoInstance.webhook(req, res)); 
+
+app.post("/notifications", (req, res) => MercadoPagoInstance.notifications(req, res)); 
  
 app.listen(process.env.PORT || 5000, () => {
     console.log('The server now is lisen on 5000');
