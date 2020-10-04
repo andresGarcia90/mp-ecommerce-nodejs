@@ -19,14 +19,12 @@ class MercadoPagoService{
     }
 
     async createPaymentMercadoPago(name, price, unit, img){
-        const url = this.mercadoPagoUrl+"/preferences?access_token="+this.tokenMercadoPago.test.access_token;
-
         mercadopago.configure({
           access_token : this.tokenMercadoPago.test.access_token,
           integrator_id: this.tokenMercadoPago.test.platform_id
       });
 
-
+        let url_imagen = img.substring(1,img.length);
         const items = [
             {
               id: "1234", 
@@ -35,7 +33,7 @@ class MercadoPagoService{
             // nombre que viene de la prop que recibe del controller
               description: "Dispositivo móvil de Tienda e-commerce",
             // descripción del producto
-              picture_url: 'https://andresgarci-mp-commerce-nodejs.herokuapp.com/assets/003.jpg', 
+              picture_url: 'https://andresgarci-mp-commerce-nodejs.herokuapp.com'+url_imagen, 
             // url de la imágen del producto
               category_id: "1234",  
             // categoría interna del producto (del negocio)
@@ -43,7 +41,7 @@ class MercadoPagoService{
             // cantidad, que tiene que ser un intiger
               currency_id: "ARS", 
             // id de la moneda, que tiene que ser en ISO 4217
-              unit_price: parseFloat(price),
+              unit_price: parseInt(price),
             // el precio, que por su complejidad tiene que ser tipo FLOAT
               external_reference : 'garcia.andi90@gmail.com'
             }
