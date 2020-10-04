@@ -54,7 +54,7 @@ class MercadoPagoService{
             // declaramos las preferencias de pago
                   items, 
             // el array de objetos, items que declaramos más arriba
-                  external_reference: "referencia del negocio", 
+                  external_reference: 'garcia.andi90@gmail.com', 
             // referencia para identificar la preferencia, puede ser practicamente cualquier valor
                   payer: { 
             // información del comprador, si estan en producción tienen que //traerlos del request
